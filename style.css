@@ -5,9 +5,36 @@
 body {
   height: 100vh;
   background: coral;
+}
+.heading {
+  width: 550px;
+  height: 300px;
+  margin: auto;
+  text-align: center;
+
+  font-size: 50px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+}
+
+.game {
+  padding: 80px;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
+}
+.play-again {
+  margin: auto;
+  text-align: center;
+  font-size: 25px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+}
+
+#outcome {
+  font-size: 25px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
 }
 #rock:hover,
 #paper:hover,
