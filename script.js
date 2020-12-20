@@ -1,11 +1,12 @@
 "use strict";
-let item = document.querySelector(".game");
-let rock = document.getElementById("rock");
-let paper = document.getElementById("paper");
-let scissors = document.getElementById("scissors");
-let outcome = document.getElementById("outcome");
-let reset = document.querySelector(".play-again");
+// selecting elements
+const rock = document.getElementById("rock");
+const paper = document.getElementById("paper");
+const scissors = document.getElementById("scissors");
+const outcome = document.getElementById("outcome");
+const reset = document.querySelector(".play-again");
 
+// element listeners
 rock.addEventListener("click", rockHandler);
 paper.addEventListener("click", paperHandler);
 scissors.addEventListener("click", scissorsHandler);

@@ -29,6 +29,7 @@ body {
   font-size: 25px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-weight: bold;
+  text-decoration: underline;
 }
 
 #outcome {
@@ -82,21 +83,3 @@ body {
 .hidden {
   display: none;
 }
-
-/* #rock:active,
-#paper:active,
-#scissors:active {
-  animation-name: bounce;
-  animation-timing-function: linear;
-}
-@keyframes bounce {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-25px);
-  }
-  100% {
-    transform: translateY(0);
-  }
-} */
