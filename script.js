@@ -5,101 +5,75 @@ const paper = document.getElementById("paper");
 const scissors = document.getElementById("scissors");
 const outcome = document.getElementById("outcome");
 const reset = document.querySelector(".play-again");
+const playerChoiceDisplay = document.getElementById("player");
+const computerChoiceDisplay = document.getElementById("computer");
 
 // element listeners
-rock.addEventListener("click", rockHandler);
-paper.addEventListener("click", paperHandler);
-scissors.addEventListener("click", scissorsHandler);
+rock.addEventListener("click", () => compareChoices("rock"));
+paper.addEventListener("click", () => compareChoices("paper"));
+scissors.addEventListener("click", () => compareChoices("scissors"));
 reset.addEventListener("click", () => {
   document.location.reload();
 });
 
-let isRock = false;
-function rockHandler(e) {
-  isRock = !isRock;
-  paper.classList.add("hidden");
-  scissors.classList.add("hidden");
-  if (!gameOver) gamePlay();
-  compare();
+function getComputerChoice() {
+  const choices = ["rock", "paper", "scissors"];
+  const randomChoice = Math.floor(Math.random() * 3);
+  return choices[randomChoice];
 }
-let isPaper = false;
-function paperHandler(e) {
-  isPaper = !isPaper;
-  rock.classList.add("hidden");
-  scissors.classList.add("hidden");
-  if (!gameOver) gamePlay();
-  compare();
-}
+function renderResults(userChoice, computerChoice) {
+  const renderPlayerChoice = document.getElementById("playerChoice");
+  renderPlayerChoice.src = `Images/rps-${userChoice}.png`;
+  renderPlayerChoice.classList.remove("hidden");
 
-let isScissors = false;
-function scissorsHandler(e) {
-  isScissors = !isScissors;
-  rock.classList.add("hidden");
-  paper.classList.add("hidden");
-  if (!gameOver) gamePlay();
-  compare();
-}
+  const renderComputerChoice = document.getElementById("computerChoice");
+  renderComputerChoice.src = `Images/rps-${computerChoice}.png`;
+  renderComputerChoice.classList.remove("hidden");
 
-let computerGuess = 0;
-let gameOver = false;
-function gamePlay() {
-  // generate random rock paper scissors
-  const random = Math.trunc(Math.random() * 3) + 1;
-
-  // store computer guess
-  computerGuess = random;
-
-  // display computer choice
-  const renderComputerGuess = document.getElementById("computer guess");
-  renderComputerGuess.src = `Images/rps-${random}.png`;
-  renderComputerGuess.classList.remove("hidden");
   outcome.classList.remove("hidden");
   reset.classList.remove("hidden");
-
-  // game status
-  gameOver = !gameOver;
+  playerChoiceDisplay.classList.remove("hidden");
+  computerChoiceDisplay.classList.remove("hidden");
 }
 
-function compare() {
-  // Player chooses Rock
-  // draw
-  if (isRock == true && computerGuess == 1) {
-    outcome.innerText = "DRAW";
+function compareChoices(userChoice) {
+  rock.classList.add("hidden");
+  paper.classList.add("hidden");
+  scissors.classList.add("hidden");
 
-    // computer wins
-  } else if (isRock == true && computerGuess == 2) {
-    outcome.innerText = "PAPER COVERS ROCK \n \n YOU LOSE";
+  const computerChoice = getComputerChoice();
 
-    // you win
-  } else if (isRock == true && computerGuess == 3) {
-    outcome.innerText = "ROCK BEATS SCISSORS \n \n YOU WIN";
-  }
+  renderResults(userChoice, computerChoice);
 
-  // Player chooses Paper
-  // draw
-  if (isPaper == true && computerGuess == 2) {
-    outcome.innerText = "DRAW";
-
-    // computer wins
-  } else if (isPaper == true && computerGuess == 3) {
-    outcome.innerText = "SCISSORS CUT PAPER \n \n YOU LOSE";
-
-    // you win
-  } else if (isPaper == true && computerGuess == 1) {
-    outcome.innerText = "PAPER COVERS ROCK \n \n YOU WIN";
-  }
-
-  // Player chooses Scissors
-  // draw
-  if (isScissors == true && computerGuess == 3) {
-    outcome.innerText = "DRAW";
-
-    // computer wins
-  } else if (isScissors == true && computerGuess == 1) {
-    outcome.innerText = "ROCK BEATS SCISSORS \n \n YOU LOSE";
-
-    // you win
-  } else if (isScissors == true && computerGuess == 2) {
-    outcome.innerText = "SCISSORS CUT PAPER \n \n YOU WIN";
+  switch (userChoice + computerChoice) {
+    case "rockscissors":
+      outcome.innerText = "ROCK BEATS SCISSORS \n \n YOU WIN";
+      break;
+    case "paperrock":
+      outcome.innerText = "PAPER COVERS ROCK \n \n YOU WIN";
+      break;
+    case "scissorspaper":
+      outcome.innerText = "SCISSORS CUT PAPER \n \n YOU WIN";
+      break;
+    case "scissorsrock":
+      outcome.innerText = "ROCK BEATS SCISSORS \n \n YOU LOSE";
+      break;
+    case "rockpaper":
+      outcome.innerText = "PAPER COVERS ROCK \n \n YOU LOSE";
+      break;
+    case "paperscissors":
+      outcome.innerText = "SCISSORS CUT PAPER \n \n YOU LOSE";
+      break;
+    case "rockrock":
+      outcome.innerText = "DRAW";
+      break;
+    case "paperpaper":
+      outcome.innerText = "Draw";
+      break;
+    case "scissorsscissors":
+      outcome.innerText = "Draw";
+      break;
+    default:
+      return;
   }
 }
